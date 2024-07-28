@@ -37,3 +37,4 @@ The specifications for the physical table & controller electronics are: <br>
 	</ul>
 </ul>
 
+/home/john/Documents/Stainsmart_Breakout_ST-V3_Board.pdf
