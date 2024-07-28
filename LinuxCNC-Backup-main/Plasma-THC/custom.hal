@@ -1,0 +1,76 @@
+# Include your custom HAL commands here
+# This file will not be overwritten when you run stepconf again
+
+# for the float and ohmic inputs each increment in delay is
+# is a 0.001mm (0.00004") increase in any probed height result
+setp db_float.delay     5
+setp db_ohmic.delay     5
+setp db_breakaway.delay 5
+setp db_arc-ok.delay    5
+
+
+
+########################################
+# The following variables are available for fine tuning some parameters.
+# To use any of these, uncomment the required setp line and set an appropriate value.
+
+# Dampen excessive noise on the arc voltage input
+# default = 0 (volts)
+#setp plasmac.lowpass-frequency 0.0625
+
+# The time delay from losing the arc ok signal until QtPlasmaC reacts to the arc loss.
+# default = 0.0 (seconds)
+setp plasmac.arc-lost-delay 0.5
+
+# For mode 0 Arc-OK only, the number of consecutive readings within the threshold that are required to set the Arc-OK signal.
+# default = 6
+#setp plasmac.arc-ok-counts 4
+
+# For mode 0 Arc-OK only, the maximum voltage deviation that is allowed for a valid voltage to set the Arc OK signal.
+# default = 10 (volts)
+#setp plasmac.arc-ok-threshold 10
+
+# The voltage above and below 0V that will display as 0V. Prevents small fluctuations from flickering the voltage display.
+# default = 0 (volts)
+#setp plasmac.zero-window 0
+
+# The distance (in millimeters) away from the Z MAX_LIMIT that QtPlasmaC will allow the Z axis to travel while under machine control.
+# default = 5 (mm)
+setp plasmac.max-offset 5
+
+# The required number of consecutive times that the threshold has been exceeded before applying the void lock to the THC.
+# default = 2
+#setp plasmac.kerf-error-max 2
+
+# THCUD Setup Info & Implementation
+#
+# Typical Physical Connections using a Parallel Port
+# Parallel Pin 12 <= THC controller Plasma Up/ Port 1
+# Parallel Pin 13 <= THC controller Plasma Down/ Port 1
+# Parallel Pin 15 <= Plasma Torch Arc Ok Signal/ Port 1
+# Parallel Pin 14 => Plasma Torch Start Arc Contacts/ Port 0
+
+# HAL Plasma Connections
+#loadrt thcud
+#addf thcud servo-thread
+
+#net torch-up thcud.torch-up <= parport.1.pin-12-in
+#net torch-down thcud.torch-down <= parport.1.pin-13-in
+#net torch-on spindle.0.on => parport.0.pin-16-out (start the arc)
+#net arc-ok thcud.arc-ok <= motion.digital-in-00 <= parport.1.pin-15-in (arc ok signal)
+
+# HAL Motion Connections
+#net requested-vel thcud.requested-vel <= motion.requested-vel
+#net current-vel thcud.current-vel <= motion.current-vel
+
+#net zpos-cmd thcud.z-pos-in <= axis.3.motor-pos-cmd
+#net thc-pos-cmd thcud.z-pos-out => stepgen.3.position-cmd
+#net zpos-fb axis.3.motor-pos-fb <= thcud.z-fb-out
+
+#setp thcud.correction-vel 0.0001
+#setp thcud.velocity-tol 10
+#setp thcud.enable true
+#setp thcud.torch-on true
+
+# End THCUD Setup Info & Implementation
+

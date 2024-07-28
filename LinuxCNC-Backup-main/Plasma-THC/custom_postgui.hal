@@ -1,0 +1,16 @@
+# Include your custom_postgui HAL commands here
+# This file will not be overwritten when you run stepconf again
+
+########### SETUP THE MACHINE LIGHT #########
+# Turn on the machine light to red to kick things off.
+#setp parport.0.pin-16-out true
+#net greenlight parport.0.pin-17-out classicladder.0.out-02
+##net yellowlight hm2_7i96s.0.7i76.0.1.output-11 classicladder.0.out-01
+#net redlight parport.0.pin-16-out classicladder.0.out-00
+#net e-stop halui.estop.is-activated classicladder.0.in-00
+#net pwr-on halui.machine.is-on classicladder.0.in-01
+#net machine.is-on classicladder.0.in-01
+#net prg-run halui.program.is-running classicladder.0.in-02
+##net pdnt.program-is-running halui.program.is-running classicladder.0.in-02
+#net halui.program.is-idle classicladder.0.in-03
+##net pdnt.program-is-idle classicladder.0.in-03
