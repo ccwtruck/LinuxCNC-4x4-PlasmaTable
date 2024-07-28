@@ -36,6 +36,6 @@ The specifications for the physical table & controller electronics are: <br>
 		</ul>
 	</ul>
 </ul>
-[Stainsmart_Breakout_ST-V3_Board.pdf](https://github.com/user-attachments/files/16405466/Stainsmart_Breakout_ST-V3_Board.jpg)
+[Stainsmart_Breakout_ST-V3_Board.pdf]([https://github.com/user-attachments/files/16405466/Stainsmart_Breakout_ST-V3_Board.jpg](https://github.com/ccwtruck/LinuxCNC-4x4-PlasmaTable/blob/main/Stainsmart_Breakout_ST-V3_Board.jpg))
 
 
